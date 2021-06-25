@@ -2,7 +2,7 @@
 
 ## Your task is to create a MongoDB to SQL translator written in Python
 
-**Examples:**
+### Examples:
 in: `db.user.find({name:'julio'});`
 out: `SELECT * FROM user WHERE name = 'julio';`
 						
