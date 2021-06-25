@@ -1,6 +1,9 @@
+def destructureQuery(query):
+  return query.split('.')
+
 def translator(mongoQuery):
-  
-  return mongoQuery
+  db, table, method = destructureQuery(mongoQuery)
+  return method
 
 
 
