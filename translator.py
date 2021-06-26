@@ -58,7 +58,7 @@ def stringifyWhere(whereString):
 
 # Helper function to parse list of fields to select
 def fieldsList(fieldsString):
-  fields = fieldsString.split(',')
+  fields = fieldsString.replace("{","").replace("}","").split(',')
   fieldNames = []
 
   for field in fields:
@@ -71,7 +71,7 @@ def fieldsList(fieldsString):
 # Helper function to stringify fields for appending to SQL query
 def stringifyFields(fieldsString):
   fields = fieldsList(fieldsString)
-  return ",".join(fields)
+  return ", ".join(fields)
 
 # Helper function to separate WHERE and FIELDS arguments
 def whereAndFieldsSeparator(arguments):
