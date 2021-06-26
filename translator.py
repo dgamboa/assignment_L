@@ -12,12 +12,30 @@ operatorLibrary = {
 
 # Helper function to parse list of where clauses
 def whereList(whereString):
-  if whereString.find("}") != -1:
-    whereClauses = whereString.replace("{","").split("},")
-  else:
-    whereClauses = whereString.split(",")
-  
-  return whereClauses
+  # if whereString.find("}") != -1:
+  #   whereClauses = whereString.replace("{","").split("},")
+  # else:
+  #   whereClauses = whereString.split(",")
+  clauses = []
+  tracker = ""
+  brace_counter = 1
+
+  for c in whereString[1:]:
+    if brace_counter == 1 and (c == "," or c == "}"):
+      clauses.append(tracker)
+      tracker = ""
+      continue
+    
+    if c == "{":
+      brace_counter += 1
+    elif c == "}":
+      brace_counter -= 1
+    
+    tracker += c
+
+  print(f'clauses: {clauses}')
+
+  return clauses
 
 # Helper function to parse where clause with AND/OR operators
 def operatorsClause(clauseWithOperators):
@@ -84,7 +102,7 @@ def whereAndFieldsSeparator(arguments):
   #   return arguments[1:-1].split("},{")
 
   parenthesis_counter = 1
-  bracket_counter = 0
+  brace_counter = 0
   whereStr = []
   fieldStr = []
   i = 1
@@ -95,9 +113,9 @@ def whereAndFieldsSeparator(arguments):
     i += 1
 
     if c == "{":
-      bracket_counter += 1
+      brace_counter += 1
     elif c == "}":
-      bracket_counter -= 1
+      brace_counter -= 1
     
     toUpdate.append(c)
 
@@ -106,13 +124,11 @@ def whereAndFieldsSeparator(arguments):
     elif arguments[i] == ")":
       parenthesis_counter -= 1
     
-    if bracket_counter == 0:
+    if brace_counter == 0:
       toUpdate = fieldStr
       i += 1
     
   return ["".join(whereStr), "".join(fieldStr)]
-
-
 
 # Helper function to destructure method from arguments
 def destructureMethod(call):
@@ -133,9 +149,9 @@ def translator(mongoQuery):
   method, combinedArguments = destructureMethod(methodCall)
 
   separatedArguments = whereAndFieldsSeparator(combinedArguments)
-  print(f'sepA: {separatedArguments}')
 
   whereArguments = separatedArguments[0]
+  print(f'whereA: {separatedArguments[0]}')
 
   fieldsSQL = "*" if separatedArguments[1] == "" else stringifyFields(separatedArguments[1])
 
