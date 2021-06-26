@@ -76,7 +76,10 @@ def stringifyFields(fieldsString):
 # Helper function to separate WHERE and FIELDS arguments
 def whereAndFieldsSeparator(arguments):
   arguments = arguments.replace("(","").replace(")","").replace(";","").replace(" ","")
-  return arguments[1:-1].split("},{")
+  if "[" in arguments:
+    return arguments[1:-1].split("]},{")
+  else:
+    return arguments[1:-1].split("},{")
 
 # Helper function to destructure method from arguments
 def destructureMethod(call):
@@ -97,6 +100,7 @@ def translator(mongoQuery):
   method, combinedArguments = destructureMethod(methodCall)
 
   separatedArguments = whereAndFieldsSeparator(combinedArguments)
+  print(separatedArguments)
 
   whereArguments = separatedArguments[0]
 
@@ -119,14 +123,21 @@ example4 = "db.user.find({age:{$gte:21,$lte:50}});"
 example5 = "db.user.find({age:{$gte:21,$lte:50},name:'julio'});"
 example6 = "db.user.find({age:20,name:'julio'});"
 example7 = "db.user.find({},{name:1,age:1});"
+example8 = "db.user.find({},{name:1,age:1,_id:0});"
+example9 = "db.user.find({$or:[{status:'A'},{age:50}]})"
+example10 = "db.user.find({$or:[{status:'A'},{age:50}]},{name:1,age:1})"
 
-print(translator(example1))
-print(translator(example2))
-print(translator(example3))
-print(translator(example4))
-print(translator(example5))
-print(translator(example6))
-print(translator(example7))
+
+# print(translator(example1))
+# print(translator(example2))
+# print(translator(example3))
+# print(translator(example4))
+# print(translator(example5))
+# print(translator(example6))
+# print(translator(example7))
+# print(translator(example8))
+print(translator(example9))
+print(translator(example10))
 
 # print(stringifyWhere("name:'julio',age:20"))
 # print(stringifyWhere("age:{$gte:21,$lte:50},name:'julio'"))
