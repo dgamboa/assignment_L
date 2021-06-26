@@ -19,9 +19,10 @@ def whereList(whereString):
   clauses = []
   tracker = ""
   brace_counter = 1
+  bracket_counter = 0
 
   for c in whereString[1:]:
-    if brace_counter == 1 and (c == "," or c == "}"):
+    if brace_counter == 1 and bracket_counter == 0 and (c == "," or c == "}"):
       clauses.append(tracker)
       tracker = ""
       continue
@@ -29,6 +30,11 @@ def whereList(whereString):
     if c == "{":
       brace_counter += 1
     elif c == "}":
+      brace_counter -= 1
+    
+    if c == "[":
+      brace_counter += 1
+    elif c == "]":
       brace_counter -= 1
     
     tracker += c
