@@ -3,19 +3,19 @@ The following represents my time allocation while working on the assignment. The
 
 ## Understanding the Assignment
 - First Read:
-  - Fri 3:45pm CT (20min)
+  - Fri 3:45pm CT (15min)
   - Read the assignment
-  - Review SQL vs NoSQL differences [link](https://www.youtube.com/watch?v=ZS_kXvOeQ5Y)
+  - Review SQL vs NoSQL differences
 
 ## Planning
 - Define Functional Requirements:
-  - Fri 4:15pm CT ()
+  - Fri 4:15pm CT (15min)
   - Leverage test brief
   - Read MongoDB docs
   - Refresh basic SQL commands
   - Write specs section of [documentation](./documentation.md)
 - Research map of find command and attributes to SQL SELECT command and attributes
-  - Fri pm CT ()
+  - Fri 4:45pm CT (45min)
   - Structure program
 
 ## Execution
@@ -26,3 +26,12 @@ The following represents my time allocation while working on the assignment. The
 - P0: Manually test the main function
 - P1: Research Python testing frameworks
 - P1: Integrate test suite
+
+- Build out parse functionality for field names, if any
+  - Sat 10:00am CT (15min)
+  - Split arguments
+  - Parse field names
+  - Create SQL string with * or field names
+- Build out parse functionality for where clause
+  - Sat 10:30am CT ()
+  
