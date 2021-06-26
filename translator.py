@@ -20,11 +20,10 @@ def whereList(whereString):
   return whereClauses
 
 # Helper function to parse where clause with AND/OR operators
-def operatorsClause(combinedClauses):
+def operatorsClause(clauseWithOperators):
   queryString = ""
 
-  splitClauses = combinedClauses.split("$")
-  print(splitClauses)
+  splitClauses = clauseWithOperators.split("$")
 
   field = splitClauses[0].replace(":","")
 
@@ -37,13 +36,13 @@ def operatorsClause(combinedClauses):
     operatorSQL = operatorLibrary[clause[:colon]]
     queryString += f' {field} {operatorSQL} {clause[colon + 1:]}'
 
-  print(queryString)
+  return queryString
 
 # Helper function to stringify where clauses for append to SQL query
 def stringifyWhere(whereString):
   clauses = whereList(whereString)
 
-  whereSQL = "WHERE"
+  whereSQL = " WHERE"
 
   for i, clause in enumerate(clauses):
     if i > 0:
@@ -53,9 +52,7 @@ def stringifyWhere(whereString):
       colon = clause.find(":")
       whereSQL += f' {clause[:colon]} = {clause[colon + 1:]}'
     else:
-      # extract operators
-      # build string
-      pass
+      whereSQL += operatorsClause(clause)
   
   return whereSQL
 
@@ -105,12 +102,9 @@ def translator(mongoQuery):
 
   fieldsSQL = "*" if len(separatedArguments) == 1 else stringifyFields(separatedArguments[1])
 
-  print(whereArguments)
-  print(fieldsSQL)
+  whereSQL = "" if len(whereArguments) == 0 else stringifyWhere(whereArguments)
 
-  # whereSQL = "" if len(whereArguments) == 0 else []
-
-  # return f'SELECT {fieldsSQL} FROM {table}' + whereSQL
+  return f'SELECT {fieldsSQL} FROM {table}' + whereSQL + ";"
 
 
 
@@ -126,8 +120,14 @@ example5 = "db.user.find({age:{$gte:21,$lte:50},name:'julio'});"
 example6 = "db.user.find({age:20,name:'julio'});"
 example7 = "db.user.find({},{name:1,age:1});"
 
-# translator(example7)
+print(translator(example1))
+print(translator(example2))
+print(translator(example3))
+print(translator(example4))
+print(translator(example5))
+print(translator(example6))
+print(translator(example7))
 
 # print(stringifyWhere("name:'julio',age:20"))
 # print(stringifyWhere("age:{$gte:21,$lte:50},name:'julio'"))
-print(operatorsClause('age:$gte:21,$lte:50'))
+# print(operatorsClause('age:$gte:21'))
