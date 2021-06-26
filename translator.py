@@ -45,12 +45,11 @@ def operatorsClause(clauseWithOperators):
   
   splitClauses = clauseWithOperators.split("$")
   
-  field = splitClauses[0].replace(":","")
+  field = splitClauses[0].replace(":","").replace("{","")
 
   for i in range(1, len(splitClauses)):
     if i > 1:
       queryString += " AND"
-
     clause = splitClauses[i].replace(",","").replace("}","")
     colon = clause.find(":")
     operatorSQL = operatorLibrary[clause[:colon]]
@@ -64,16 +63,33 @@ def stringifyWhere(whereString):
 
   whereSQL = " WHERE"
 
-  for i, clause in enumerate(clauses):
-    if i > 0:
+  for clause in clauses:
+    if clause != clauses[0]:
       whereSQL += " AND"
 
+    # simple where clause without operators
     if clause.find("$") == -1:
       colon = clause.find(":")
       whereSQL += f' {clause[:colon]} = {clause[colon + 1:]}'
+    # clause with $or operator
+    elif clause.find("$or") != -1:
+      conditionsStr = clause[clause.find("[") + 1:clause.find("]")].replace("{","").replace("}","")
+      conditions = conditionsStr.split(",")
+      # " (status = 'A' OR age = 50)"
+      orSQL = " ("
+      for condition in conditions:
+        colon = condition.find(":")
+        orSQL += f'{condition[:colon]} = {condition[colon + 1:]}'
+        if condition != conditions[-1]:
+          orSQL += " OR "
+      whereSQL += orSQL + ")"
+    # clause for $in operator
+    elif clause.find("$in") != -1:
+      pass
+    # clause for all other operators
     else:
       whereSQL += operatorsClause(clause)
-  
+
   return whereSQL
 
 # Helper function to parse list of fields to select
@@ -169,20 +185,21 @@ example7 = "db.user.find({},{name:1,age:1});"
 example8 = "db.user.find({},{name:1,age:1,_id:0});"
 example9 = "db.user.find({$or:[{status:'A'},{age:50}]})"
 example10 = "db.user.find({$or:[{status:'A'},{age:50}],name:'julio'},{name:1,age:1})" 
-# -> SELECT name, age FROM user WHERE (status = 'A' OR age = 50) AND (name = 'julio');
+# -> SELECT name, age FROM user WHERE (status = 'A' OR age = 50) AND name = 'julio';
 example11 = "db.user.find({age:{$in:[20,25]}})"
 # -> SELECT * FROM user WHERE age IN (20, 25);
 
-translator(example1)
-translator(example2)
-translator(example3)
-translator(example4)
-translator(example5)
+print(translator(example1))
+print(translator(example2))
+print(translator(example3))
+print(translator(example4))
+print(translator(example5))
 # print(translator(example6))
 # print(translator(example7))
-translator(example8)
+print(translator(example8))
 # print(translator(example9))
-translator(example10)
+print(translator(example10))
+# translator(example11)
 
 # print(stringifyWhere("name:'julio',age:20"))
 # print(stringifyWhere("age:{$gte:21,$lte:50},name:'julio'"))
