@@ -24,6 +24,7 @@ The following represents my time allocation while working on the assignment. The
 - P0: Write main function abstracting helper functions
 - P0: Write helper functions
 - P0: Manually test the main function
+- P1: Review Python module docs for file structuring
 - P1: Research Python testing frameworks
 - P1: Integrate test suite
 
@@ -33,5 +34,5 @@ The following represents my time allocation while working on the assignment. The
   - Parse field names
   - Create SQL string with * or field names
 - Build out parse functionality for where clause
-  - Sat 10:30am CT ()
-  
+  - Sat 10:30am CT (30min)
+  - Sat 11:15am CT (45min)
