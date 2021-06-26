@@ -139,7 +139,7 @@ def translator(mongoQuery):
 
   fieldsSQL = "*" if len(separatedArguments) == 1 else stringifyFields(separatedArguments[1])
 
-  whereSQL = "" if len(whereArguments) == 0 else stringifyWhere(whereArguments)
+  whereSQL = "" if whereArguments.replace(" ","") == '{}' else stringifyWhere(whereArguments)
 
   return f'SELECT {fieldsSQL} FROM {table}' + whereSQL + ";"
 
