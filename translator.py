@@ -12,10 +12,6 @@ operatorLibrary = {
 
 # Helper function to parse list of where clauses
 def whereList(whereString):
-  # if whereString.find("}") != -1:
-  #   whereClauses = whereString.replace("{","").split("},")
-  # else:
-  #   whereClauses = whereString.split(",")
   clauses = []
   tracker = ""
   brace_counter = 1
@@ -99,14 +95,6 @@ def stringifyFields(fieldsString):
 
 # Helper function to separate WHERE and FIELDS arguments
 def whereAndFieldsSeparator(arguments):
-  # arguments -> ({age:{$gte:21}},{name:1,_id:1});
-
-  # arguments = arguments.replace("(","").replace(")","").replace(";","").replace(" ","")
-  # if "[" in arguments:
-  #   return arguments[1:-1].split("]},{")
-  # else:
-  #   return arguments[1:-1].split("},{")
-
   parenthesis_counter = 1
   brace_counter = 0
   whereStr = []
@@ -157,7 +145,7 @@ def translator(mongoQuery):
   separatedArguments = whereAndFieldsSeparator(combinedArguments)
 
   whereArguments = separatedArguments[0]
-  print(f'whereA: {separatedArguments[0]}')
+  # print(f'whereA: {separatedArguments[0]}')
 
   fieldsSQL = "*" if separatedArguments[1] == "" else stringifyFields(separatedArguments[1])
 
@@ -182,18 +170,19 @@ example8 = "db.user.find({},{name:1,age:1,_id:0});"
 example9 = "db.user.find({$or:[{status:'A'},{age:50}]})"
 example10 = "db.user.find({$or:[{status:'A'},{age:50}],name:'julio'},{name:1,age:1})" 
 # -> SELECT name, age FROM user WHERE (status = 'A' OR age = 50) AND (name = 'julio');
+example11 = "db.user.find({age:{$in:[20,25]}})"
+# -> SELECT * FROM user WHERE age IN (20, 25);
 
-
-print(translator(example1))
-print(translator(example2))
-print(translator(example3))
-print(translator(example4))
-print(translator(example5))
-print(translator(example6))
-print(translator(example7))
-print(translator(example8))
-print(translator(example9))
-print(translator(example10))
+translator(example1)
+translator(example2)
+translator(example3)
+translator(example4)
+translator(example5)
+# print(translator(example6))
+# print(translator(example7))
+translator(example8)
+# print(translator(example9))
+translator(example10)
 
 # print(stringifyWhere("name:'julio',age:20"))
 # print(stringifyWhere("age:{$gte:21,$lte:50},name:'julio'"))
