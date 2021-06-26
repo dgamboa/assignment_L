@@ -22,9 +22,9 @@ def whereList(whereString):
 # Helper function to parse where clause with AND/OR operators
 def operatorsClause(clauseWithOperators):
   queryString = ""
-
+  
   splitClauses = clauseWithOperators.split("$")
-
+  
   field = splitClauses[0].replace(":","")
 
   for i in range(1, len(splitClauses)):
@@ -75,11 +75,44 @@ def stringifyFields(fieldsString):
 
 # Helper function to separate WHERE and FIELDS arguments
 def whereAndFieldsSeparator(arguments):
-  arguments = arguments.replace("(","").replace(")","").replace(";","").replace(" ","")
-  if "[" in arguments:
-    return arguments[1:-1].split("]},{")
-  else:
-    return arguments[1:-1].split("},{")
+  # arguments -> ({age:{$gte:21}},{name:1,_id:1});
+
+  # arguments = arguments.replace("(","").replace(")","").replace(";","").replace(" ","")
+  # if "[" in arguments:
+  #   return arguments[1:-1].split("]},{")
+  # else:
+  #   return arguments[1:-1].split("},{")
+
+  parenthesis_counter = 1
+  bracket_counter = 0
+  whereStr = []
+  fieldStr = []
+  i = 1
+  toUpdate = whereStr
+
+  while parenthesis_counter > 0:
+    c = arguments[i]
+    i += 1
+
+    if c == "{":
+      bracket_counter += 1
+    elif c == "}":
+      bracket_counter -= 1
+    
+    toUpdate.append(c)
+
+    if arguments[i] == "(":
+      parenthesis_counter += 1
+    elif arguments[i] == ")":
+      parenthesis_counter -= 1
+    
+    if bracket_counter == 0:
+      toUpdate = fieldStr
+      i += 1
+    
+  return ["".join(whereStr), "".join(fieldStr)]
+
+
 
 # Helper function to destructure method from arguments
 def destructureMethod(call):
@@ -100,7 +133,7 @@ def translator(mongoQuery):
   method, combinedArguments = destructureMethod(methodCall)
 
   separatedArguments = whereAndFieldsSeparator(combinedArguments)
-  print(separatedArguments)
+  print(f'sepA: {separatedArguments}')
 
   whereArguments = separatedArguments[0]
 
@@ -125,17 +158,18 @@ example6 = "db.user.find({age:20,name:'julio'});"
 example7 = "db.user.find({},{name:1,age:1});"
 example8 = "db.user.find({},{name:1,age:1,_id:0});"
 example9 = "db.user.find({$or:[{status:'A'},{age:50}]})"
-example10 = "db.user.find({$or:[{status:'A'},{age:50}]},{name:1,age:1})"
+example10 = "db.user.find({$or:[{status:'A'},{age:50}],name:'julio'},{name:1,age:1})" 
+# -> SELECT name, age FROM user WHERE (status = 'A' OR age = 50) AND (name = 'julio');
 
 
-# print(translator(example1))
-# print(translator(example2))
-# print(translator(example3))
-# print(translator(example4))
-# print(translator(example5))
-# print(translator(example6))
-# print(translator(example7))
-# print(translator(example8))
+print(translator(example1))
+print(translator(example2))
+print(translator(example3))
+print(translator(example4))
+print(translator(example5))
+print(translator(example6))
+print(translator(example7))
+print(translator(example8))
 print(translator(example9))
 print(translator(example10))
 
