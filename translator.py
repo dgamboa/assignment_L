@@ -47,9 +47,9 @@ def translator(mongoQuery):
   print(whereArguments)
   print(fieldsSQL)
 
-  # whereClause = ""
+  # whereSQL = "" if len(whereArguments) == 0 else []
 
-  # return f'SELECT {fieldsSQL} FROM {table}' + whereClause
+  # return f'SELECT {fieldsSQL} FROM {table}' + whereSQL
 
 
 
@@ -61,5 +61,8 @@ example1 = "db.user.find({name:'julio'});"
 example2 = "db.user.find({_id:23113},{name:1,age:1});"
 example3 = "db.user.find({age:{$gte:21}},{name:1,_id:1});"
 example4 = "db.user.find({age:{$gte:21,$lte:50}});"
+example5 = "db.user.find({age:{$gte:21,$lte:50},name:'julio'});"
+example6 = "db.user.find({age:20,name:'julio'});"
+example7 = "db.user.find({},{name:1,age:1});"
 
-translator(example1)
+translator(example7)
