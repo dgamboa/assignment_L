@@ -36,3 +36,6 @@ The following represents my time allocation while working on the assignment. The
 - Build out parse functionality for where clause
   - Sat 10:30am CT (30min)
   - Sat 11:15am CT (45min)
+  - Sat 12:45pm CT (60min) -> review OR / IN; refactor where and field separator
+  - Sat 2:15pm CT (60min) -> refactor operator functionality
+  - TBD -> implement IN functionality
