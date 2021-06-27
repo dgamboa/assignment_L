@@ -41,4 +41,5 @@ The following represents my time allocation while working on the assignment. The
   - Sat 11:15am CT (45min)
   - Sat 12:45pm CT (60min) -> review OR / IN; refactor separator for where clauses and fields
   - Sat 2:15pm CT (60min) -> refactor operator functionality
-  - Sat 7:15pm CT () -> implement IN / AND functionality
+  - Sat 7:15pm CT (15min) -> implement IN / AND functionality
+  - CT () -> modularizing functions and documentation
