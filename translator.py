@@ -72,20 +72,34 @@ def stringifyWhere(whereString):
       colon = clause.find(":")
       whereSQL += f' {clause[:colon]} = {clause[colon + 1:]}'
     # clause with $or operator
-    elif clause.find("$or") != -1:
+    elif clause.find("$or") != -1 or clause.find("$and") != -1:
+      operatorMongoDB = clause[1:clause.find(":")]
+      operatorSQL = operatorLibrary[operatorMongoDB]
+
       conditionsStr = clause[clause.find("[") + 1:clause.find("]")].replace("{","").replace("}","")
       conditions = conditionsStr.split(",")
-      # " (status = 'A' OR age = 50)"
       orSQL = " ("
+
       for condition in conditions:
         colon = condition.find(":")
         orSQL += f'{condition[:colon]} = {condition[colon + 1:]}'
         if condition != conditions[-1]:
-          orSQL += " OR "
+          orSQL += f' {operatorSQL} '
+
       whereSQL += orSQL + ")"
     # clause for $in operator
     elif clause.find("$in") != -1:
-      pass
+      fieldStr, conditionsStr = clause.split("$")
+      field = fieldStr.replace(":","").replace("{","")
+      conditions = conditionsStr[conditionsStr.find("[") + 1:conditionsStr.find("]")].split(",")
+      inSQL = f' {field} IN ('
+
+      for condition in conditions:
+        inSQL += condition
+        if condition != conditions[-1]:
+          inSQL += ", "
+
+      whereSQL += inSQL + ")"
     # clause for all other operators
     else:
       whereSQL += operatorsClause(clause)
@@ -188,18 +202,21 @@ example10 = "db.user.find({$or:[{status:'A'},{age:50}],name:'julio'},{name:1,age
 # -> SELECT name, age FROM user WHERE (status = 'A' OR age = 50) AND name = 'julio';
 example11 = "db.user.find({age:{$in:[20,25]}})"
 # -> SELECT * FROM user WHERE age IN (20, 25);
+example12 = "db.user.find({$or:[{status:'A'},{age:50}],$and:[{name:'julio'},{status:'active'}]})" 
+# -> SELECT * FROM user WHERE (status = 'A' OR age = 50) AND (name = 'julio' AND status = 'active');
 
 print(translator(example1))
 print(translator(example2))
 print(translator(example3))
 print(translator(example4))
 print(translator(example5))
-# print(translator(example6))
-# print(translator(example7))
+print(translator(example6))
+print(translator(example7))
 print(translator(example8))
-# print(translator(example9))
+print(translator(example9))
 print(translator(example10))
-# translator(example11)
+print(translator(example11))
+print(translator(example12))
 
 # print(stringifyWhere("name:'julio',age:20"))
 # print(stringifyWhere("age:{$gte:21,$lte:50},name:'julio'"))
