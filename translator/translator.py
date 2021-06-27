@@ -24,7 +24,7 @@ def translate(mongoQuery):
   whereSQL = "" if whereArguments.replace(" ","") == '{}' else helpers.stringifyWhere(whereArguments)
 
   # Return the combined string for the translated SQL query
-  return f'SELECT {fieldsSQL} FROM {table} {whereSQL};'
+  return f'SELECT {fieldsSQL} FROM {table}{whereSQL};'
 
 
 
