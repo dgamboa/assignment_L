@@ -2,7 +2,7 @@
 The purpose of the translator is to take in a MongoDB query as input, and return the same query in SQL as the output.
 
 ## Running the Translator
-
+From the main directory in the terminal, run `python translator/translator.py` to review printed query outputs. Additional examples can be added directly in `translator.py` and run in the same way.
 
 ## Engineering Specs
 - The translator supports the following MongoDB methods:
@@ -25,12 +25,15 @@ $in
 ## Design Decisions
 - String as the input / output data structure
   - Queries consist of unicode characters best represented as strings
-- File structure
-  - [followed guidelines from other projects]
+- File structure and testing
+  - After researching, I followed basic project guidelines from the Python community
+  - For simplicity, I have kept the file as an executable script rather than a full package
+  - To add test functionality, I would invest additional time researching how to turn the translator into a package and incorporate functional tests
+  - With additional time to invest, I would also want to write unit tests for the helper functions 
 - Data structures and algorithms
   - General approach:
     - My primary focus was to build a working translator
     - The intent was to get a functional MVP that could be refactored for algorithmic efficiency
     - I chose to prioritize the delivery guideline (3-4 hours) over algorithmic performance
   - Specific choices:
-    - 
+    - []
