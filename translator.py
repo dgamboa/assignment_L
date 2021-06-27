@@ -168,9 +168,15 @@ def destructureQuery(query):
 
 # Main function to translate MongoDB to SQL
 def translator(mongoQuery):
+  if type(mongoQuery) != str:
+    raise Exception("The MongoDB query must be entered as a string")
+
   db, table, methodCall = destructureQuery(mongoQuery)
 
   method, combinedArguments = destructureMethod(methodCall)
+  
+  if method != "find":
+    raise Exception("Only the MongoDB method *find* is supported at this time")
 
   separatedArguments = whereAndFieldsSeparator(combinedArguments)
 
@@ -204,6 +210,8 @@ example11 = "db.user.find({age:{$in:[20,25]}})"
 # -> SELECT * FROM user WHERE age IN (20, 25);
 example12 = "db.user.find({$or:[{status:'A'},{age:50}],$and:[{name:'julio'},{status:'active'}]})" 
 # -> SELECT * FROM user WHERE (status = 'A' OR age = 50) AND (name = 'julio' AND status = 'active');
+example13 = "db.user.watch({},{name:1,age:1});"
+
 
 print(translator(example1))
 print(translator(example2))
@@ -217,6 +225,8 @@ print(translator(example9))
 print(translator(example10))
 print(translator(example11))
 print(translator(example12))
+# print(translator(example13)) -> error, not find
+# print(translator({"table": "user", "method": "find"})) -> error, not string
 
 # print(stringifyWhere("name:'julio',age:20"))
 # print(stringifyWhere("age:{$gte:21,$lte:50},name:'julio'"))
