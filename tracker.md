@@ -5,30 +5,33 @@ The following represents my time allocation while working on the assignment. The
 - First Read:
   - Fri 3:45pm CT (15min)
   - Read the assignment
-  - Review SQL vs NoSQL differences
+  - Research SQL vs NoSQL differences
 
 ## Planning
 - Define Functional Requirements:
   - Fri 4:15pm CT (15min)
-  - Leverage test brief
-  - Read MongoDB docs
-  - Refresh basic SQL commands
+  - Leverage the test briefing provided by Lev
+  - Read MongoDB docs focusing on SQL mapping
+  - Review basic SQL commands as a refresher
   - Write specs section of [documentation](./documentation.md)
-- Research map of find command and attributes to SQL SELECT command and attributes
+- Research find command and attributes, and structure the main translator program
   - Fri 4:45pm CT (45min)
-  - Structure program
+  - Outline translator function
+  - Outline first set of helper functions 
 
-## Execution
+## Roadmap
 - P0: Write MongoDB to SQL maps
 - P0: Manually test the maps
 - P0: Write main function abstracting helper functions
 - P0: Write helper functions
 - P0: Manually test the main function
-- P1: Review Python module docs for file structuring
-- P1: Research Python testing frameworks
-- P1: Integrate test suite
+- P1: Research Python module docs for file structures
+- P1: Refactor main file into modules
+- P2: Research Python testing frameworks
+- P2: Integrate test suite
 
-- Build out parse functionality for field names, if any
+## Execution
+- Build out parse functionality for field names, if they're specified in the query
   - Sat 10:00am CT (15min)
   - Split arguments
   - Parse field names
@@ -36,6 +39,6 @@ The following represents my time allocation while working on the assignment. The
 - Build out parse functionality for where clause
   - Sat 10:30am CT (30min)
   - Sat 11:15am CT (45min)
-  - Sat 12:45pm CT (60min) -> review OR / IN; refactor where and field separator
+  - Sat 12:45pm CT (60min) -> review OR / IN; refactor separator for where clauses and fields
   - Sat 2:15pm CT (60min) -> refactor operator functionality
-  - TBD -> implement IN functionality
+  - Sat 7:15pm CT () -> implement IN / AND functionality
