@@ -13,7 +13,7 @@ def translate(mongoQuery):
   if method != "find":
     raise Exception("Only the MongoDB method *find* is supported at this time")
 
-  # Separate the field components for SELECT from the where clauses for filtering
+  # Separate the field components from the where clauses
   separatedArguments = helpers.whereAndFieldsSeparator(combinedArguments)
 
   # Isolate the arguments associated with the where clauses
