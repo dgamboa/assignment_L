@@ -13,8 +13,8 @@ The following represents my time allocation while working on the assignment. The
   - Leverage the test briefing provided by Lev
   - Read MongoDB docs focusing on SQL mapping
   - Review basic SQL commands as a refresher
-  - Write specs section of [documentation](./documentation.md)
-- Research find command and attributes, and structure the main translator program
+  - Write specs section of documentation
+- Research `find` command and attributes, and structure the main translator program
   - Fri 4:45pm CT (45min)
   - Outline translator function
   - Outline first set of helper functions 
@@ -42,7 +42,7 @@ The following represents my time allocation while working on the assignment. The
   - Sat 12:45pm CT (60min) -> review OR / IN; refactor separator for where clauses and fields
   - Sat 2:15pm CT (60min) -> refactor operator functionality
   - Sat 7:15pm CT (15min) -> implement IN / AND functionality
-  - Sat 7:45pm CT (30min) -> modularizing functions and documentation
+  - Sat 7:45pm CT (30min) -> modularize functions and documentation
 - Build out integration tests
   - Sun 9:00pm CT (30min) -> research unittest
   - Mon 8:30am CT (30min) -> implement unittest
