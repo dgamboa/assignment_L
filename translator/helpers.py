@@ -35,8 +35,6 @@ def whereList(whereString):
     
     tracker += c
 
-  print(f'clauses: {clauses}')
-
   return clauses
 
 # Helper function to parse where clause with AND/OR operators
