@@ -47,3 +47,5 @@ $in
   - The logic in several of the helper functions overlaps. This logic should be abstracted into a separate function and leveraged to achieve a DRYer module (e.g. The `whereList` and `whereAndFieldsSeparator` functions both use brace counting functionality).
   - It would be useful to implement unit tests for all the helper functions before refactoring them to automate testing for bugs that might be introduced from the changes.
   - My experience building Python packages is limited, so I would want to check with a more experienced developer to incorporate best practices and make imports more robust.
+
+*I've included time allocation information in the [docs/tracker.md file](docs/tracker.md) for additional resolution into my work process*

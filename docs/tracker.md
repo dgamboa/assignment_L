@@ -48,6 +48,7 @@ The following represents my time allocation while working on the assignment. The
   - Mon 8:30am CT (30min) -> implement unittest
 - Clean up documentation
   - Mon 9:00am CT (60min)
+  - Mon 11:45am CT (10min)
 
 ## Time Sheet Summary
 - Time to understand/plan: 1.25hrs
@@ -56,5 +57,5 @@ The following represents my time allocation while working on the assignment. The
 - Subtotal (u/p + P0 + P1): 5.00hrs
 - Time to complete P2: 1.00hrs
 - Subtotal (u/p + P0 + P1 + P2): 6.00hrs
-- Final review + clean up: 1.00hrs
-- Total: 7.00hrs
+- Final review + clean up: 1.20hrs
+- Total: 7.20hrs
