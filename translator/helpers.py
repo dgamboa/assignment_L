@@ -107,12 +107,14 @@ def stringifyWhere(whereString):
 # Helper function to parse list of fields to select
 def fieldsList(fieldsString):
   fields = fieldsString.replace("{","").replace("}","").split(',')
-  fieldNames = []
+  fieldNames = ["_id"]
 
   for field in fields:
     colon = field.find(":")
     if field[colon + 1:] == '1':
       fieldNames.append(field[:colon])
+    elif field[colon + 1:] == '0':
+      fieldNames.pop(fieldNames.index(field[:colon]))
   
   return fieldNames
 
