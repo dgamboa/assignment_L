@@ -43,3 +43,15 @@ The following represents my time allocation while working on the assignment. The
   - Sat 2:15pm CT (60min) -> refactor operator functionality
   - Sat 7:15pm CT (15min) -> implement IN / AND functionality
   - Sat 7:45pm CT (30min) -> modularizing functions and documentation
+- Build out integration tests
+  - Sun 8:30am CT (30min)
+
+## Time Sheet Summary
+- Time to understand/plan: 1.25 hrs
+- Time to complete P0: 3.25 hrs
+- Time to complete P1: 0.50 hrs
+- Subtotal (u/p + P0 + P1): 5.00 hrs
+- Time to complete P2: [ ]
+- Subtotal (u/p + P0 + P1 + P2): [ ]
+- Final review + clean up: [ ]
+- Total: [ ]
