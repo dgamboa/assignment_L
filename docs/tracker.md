@@ -44,14 +44,17 @@ The following represents my time allocation while working on the assignment. The
   - Sat 7:15pm CT (15min) -> implement IN / AND functionality
   - Sat 7:45pm CT (30min) -> modularizing functions and documentation
 - Build out integration tests
-  - Sun 8:30am CT (30min)
+  - Sun 9:00pm CT (30min) -> research unittest
+  - Mon 8:30am CT (30min) -> implement unittest
+- Clean up documentation
+  - Mon 9:00am CT (60min)
 
 ## Time Sheet Summary
-- Time to understand/plan: 1.25 hrs
-- Time to complete P0: 3.25 hrs
-- Time to complete P1: 0.50 hrs
-- Subtotal (u/p + P0 + P1): 5.00 hrs
-- Time to complete P2: [ ]
-- Subtotal (u/p + P0 + P1 + P2): [ ]
-- Final review + clean up: [ ]
-- Total: [ ]
+- Time to understand/plan: 1.25hrs
+- Time to complete P0: 3.25hrs
+- Time to complete P1: 0.50hrs
+- Subtotal (u/p + P0 + P1): 5.00hrs
+- Time to complete P2: 1.00hrs
+- Subtotal (u/p + P0 + P1 + P2): 6.00hrs
+- Final review + clean up: 1.00hrs
+- Total: 7.00hrs
