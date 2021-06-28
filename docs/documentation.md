@@ -5,7 +5,7 @@ The purpose of the translator is to take in a MongoDB query as input, and return
 From the root directory in the terminal, run `python -m unittest tests/tests.py`.
 
 ## Running the Translator
-Create a sample file on the project's root directory. From the sample file, import main with `from translator import main`, and call the `main.translate` function passing in a string containing a MongoDB query: `main.translate(query -> str): -> str`. The function will return a string with the MongoDB query translated to SQL.
+Create a sample file in the project's root directory. From the sample file, import main with `from translator import main`, and call the `main.translate` function passing in a string containing a MongoDB query: `main.translate(query: str) -> str`. The function will return a string with the MongoDB query translated to SQL.
 
 Alternatively, import main in the REPL with `from translator import main` and run the function directly from the terminal.
 
